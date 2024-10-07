@@ -21,8 +21,12 @@ randomly without memory instead of systematically trying them?
 Describe your reasoning and the conclusion you've come to. Your reasoning is the
 most important part. Add your answer to this markdown file.
 
-The runtime complexity of this permutation sort is $O(n!)$. The reason being, 
+## Answer
+
+The runtime complexity of this permutation sort is $O(n!)$. The reason being, all permutations are calculated in a factorial order. you test the $n^{th}$ permutation, then the $(n-1)$ permutation, then the $(n-2)$ permutation, so on. It follows that $n! = n * (n-1)!$. This is my reasoning for concluding a runtime complexity of $O(n!)$.
 
 The best case is an input array that is already sorted. We still have to go over each element in the array however, just to ensure it is sorted. It follows that the best case time complexity is $O(n)$. 
 
 The worst case input is a very large one, and one where we have to go through each permutation in order to find the sorted array. Since the algorithm scales factorially, the larger an input size the more possible permutations there are, and the more options have to be checked in order to stumble upon the sorted array. As an example, an array of size 1000, would have $1000! = 4.0238726 E+2567$ permuations. That is a huge number! The worst case time complexity is $O(n!)$
+
+If you generate permutations without using memory, and did so randomly this would be very bad. You have no way of tracking if you already tested a permutation. So, in theory you could just continually test the same permutation, seeing if it is sorted because you would not know that you just checked it. I would say the time complexity is N/A (is there a more formal way to say this?), it could run infinitely.
