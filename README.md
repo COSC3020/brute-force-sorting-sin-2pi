@@ -21,4 +21,8 @@ randomly without memory instead of systematically trying them?
 Describe your reasoning and the conclusion you've come to. Your reasoning is the
 most important part. Add your answer to this markdown file.
 
-The runtime complexity of this permutation sort is $O(n!)$. Th 
+The runtime complexity of this permutation sort is $O(n!)$. The reason being, 
+
+The best case is an input array that is already sorted. We still have to go over each element in the array however, just to ensure it is sorted. It follows that the best case time complexity is $O(n)$. 
+
+The worst case input is a very large one, and one where we have to go through each permutation in order to find the sorted array. Since the algorithm scales factorially, the larger an input size the more possible permutations there are, and the more options have to be checked in order to stumble upon the sorted array. As an example, an array of size 1000, would have $1000! = 4.0238726 E+2567$ permuations. That is a huge number! The worst case time complexity is $O(n!)$
