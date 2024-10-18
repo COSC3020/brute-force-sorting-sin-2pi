@@ -13,32 +13,39 @@ function swap(arr, i, j) {
   arr[j] = temp;
 }
 
-function* generatePermutations(arr, start = 0) {
-  if (start === arr.length - 1) {
-    yield arr.slice();
-  } else {
-    for (let i = start; i < arr.length; i++) {
-      swap(arr, start, i);
-      yield* generatePermutations(arr, start + 1);
-      swap(arr, start, i);
+function nextPermutation(arr) {
+  let i = arr.length - 2;
+  while (i >= 0 && arr[i] >= arr[i + 1]) {
+    i--;
+  }
+  if (i >= 0) {
+    let j = arr.length - 1;
+    while (arr[j] <= arr[i]) {
+      j--;
     }
+    swap(arr, i, j);
+  }
+  reverse(arr, i + 1);
+  return i >= 0;
+}
+
+function reverse(arr, start) {
+  let i = start, j = arr.length - 1;
+  while (i < j) {
+    swap(arr, i, j);
+    i++;
+    j--;
   }
 }
 
 function permutationSort(arr) {
-  if (arr.length <= 1) return 1;
+  if (isSorted(arr)) return 1;
 
-  let shuffleCount = 0;
-  for (const perm of generatePermutations(arr)) {
-    shuffleCount++;
-    if (isSorted(perm)) {
-      for (let i = 0; i < arr.length; i++) {
-        arr[i] = perm[i];
-      }
-      return shuffleCount;
-    }
+  let attempts = 1;
+  while (!isSorted(arr)) {
+    nextPermutation(arr);
+    attempts++;
   }
 
-
-  return shuffleCount;
+  return attempts;
 }
